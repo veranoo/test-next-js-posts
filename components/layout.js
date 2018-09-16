@@ -1,6 +1,6 @@
+import React from 'react';
 import { connect } from 'react-redux';
 import Link from 'next/link'
-import { abortRequest } from '../store';
 
 const Layout = ({ children, loading }) => {
   return (
@@ -14,7 +14,7 @@ const Layout = ({ children, loading }) => {
         {loading ? <div>Trwa ładowanie</div> : children}
       </div>
   )
-}
+};
 
 const mapStateToProps = (state) => {
   return {
@@ -22,8 +22,6 @@ const mapStateToProps = (state) => {
   }
 };
 
-const mapDispatchToProps = {
-  abortRequest
-};
+const mapDispatchToProps = {};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Layout);

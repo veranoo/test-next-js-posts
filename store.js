@@ -107,7 +107,6 @@ export const getPosts = () => async (dispatch, getState, { apiService }) => {
   }
 };
 
-
 export const fetchPost = (id) => async (dispatch, getState, { apiService }) => {
   try {
     const post = await apiService.fetchPost({ id });
