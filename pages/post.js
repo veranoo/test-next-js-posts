@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchPost } from '../store';
+import PostItem from '../components/post-item';
 
 class Post extends Component {
   static async getInitialProps ({query: { id }, store}) {
@@ -13,11 +14,7 @@ class Post extends Component {
 
   render() {
     return (
-        <div>
-          Post
-          <br/>
-          { JSON.stringify(this.props.post) }
-        </div>
+        <PostItem item={this.props.post}/>
     )
   }
 }
