@@ -1,24 +1,19 @@
-import { Component } from 'react';
 import { connect } from 'react-redux';
 import Link from 'next/link'
 import { abortRequest } from '../store';
 
-class Layout extends Component {
-  render() {
-    const { children, loading } = this.props;
-    return (
-        <div>
-          <Link href={{ pathname: '/' }}>
-            <a>Index</a>
-          </Link>
-          <Link href={{ pathname: '/about' }}>
-            <a>About</a>
-          </Link>
-          <button onClick={() => abortRequest()}>Abort req</button>
-          { loading ? <div>Trwa ładowanie</div> : children }
-        </div>
-    )
-  }
+const Layout = ({ children, loading }) => {
+  return (
+      <div>
+        <Link href={{ pathname: '/' }}>
+          <a>Index</a>
+        </Link>
+        <Link href={{ pathname: '/about' }}>
+          <a>About</a>
+        </Link>
+        {loading ? <div>Trwa ładowanie</div> : children}
+      </div>
+  )
 }
 
 const mapStateToProps = (state) => {
