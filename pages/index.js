@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
-import { getPosts } from '../store';
+import { getPosts, updateTitle } from '../store';
 import { connect } from 'react-redux';
 import PostItem from '../components/post-item';
 
 class Index extends Component {
   static async getInitialProps({ store, isServer }) {
     await store.dispatch(getPosts());
+    store.dispatch(updateTitle('Strona główna'));
     return { isServer }
   }
 

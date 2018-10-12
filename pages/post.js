@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchPost } from '../store';
+import { fetchPost, updateTitle } from '../store';
 import PostItem from '../components/post-item';
 
 class Post extends Component {
@@ -9,6 +9,8 @@ class Post extends Component {
       return;
     }
     await store.dispatch(fetchPost(id));
+    const { title } = store.getState().post;
+    store.dispatch(updateTitle(`Post: ${title}`));
     return { id }
   }
 

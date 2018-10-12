@@ -2,29 +2,20 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import App, { Container } from 'next/app';
 import withRedux from 'next-redux-wrapper';
-import { abortRequest, actionTypes, initStore } from '../store';
+import { actionTypes, initStore } from '../store';
 import Layout from '../components/layout';
 
 class AppContainer extends App {
   static async getInitialProps({ Component, ctx }) {
-    let pageProps;
     ctx.store.dispatch({ type: actionTypes.SHOW_LOADING });
-
-    if (Component.getInitialProps) {
-      pageProps = await Component.getInitialProps(ctx);
-    } else {
-      pageProps = {};
-    }
-
+    const pageProps = (Component.getInitialProps) ? await Component.getInitialProps(ctx) : {}
     ctx.store.dispatch({ type: actionTypes.HIDE_LOADING });
 
-    return {
-      pageProps
-    }
+    return { pageProps }
   }
 
   render() {
-    const { Component, pageProps, store, abortRequest } = this.props;
+    const { Component, pageProps, store } = this.props;
     return (
         <Container>
           <Provider store={store}>

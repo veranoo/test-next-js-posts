@@ -36,13 +36,15 @@ class ApiService {
 const exampleInitialState = {
   posts: [],
   post: {},
-  loading: false
+  loading: false,
+  title: 'XD'
 };
 
 export const actionTypes = {
   ADD: 'ADD',
   TICK: 'TICK',
   FETCH: 'FETCH',
+  UPDATE_TITLE: 'UPDATE_TITLE',
   FETCH_POSTS: 'FETCH_POSTS',
   SHOW_LOADING: 'SHOW_LOADING',
   HIDE_LOADING: 'HIDE_LOADING',
@@ -75,8 +77,12 @@ export const reducer = (state = exampleInitialState, action) => {
         ...state,
         loading: false
       };
+    case actionTypes.UPDATE_TITLE:
+      return {
+        ...state,
+        title: action.title
+      };
     case actionTypes.FETCH_POST_SUCCESS:
-      console.log(action.payload);
       return {
         ...state,
         post: action.payload
@@ -104,6 +110,15 @@ export const getPosts = () => async (dispatch, getState, { apiService }) => {
     dispatch({ type: actionTypes.FETCH_POSTS_SUCCESS, payload: posts })
   } catch (e) {
     console.log(e);
+  }
+};
+
+export const updateTitle = (title) => dispatch => {
+  console.log(title);
+  dispatch({ type: actionTypes.UPDATE_TITLE, title });
+
+  if (typeof document === 'object') {
+    document.title = title;
   }
 };
 
